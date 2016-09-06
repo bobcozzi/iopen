@@ -1,0 +1,126 @@
+:pnlgrp.
+.************************************************************************
+.*  Help for command CRTSTMF
+.************************************************************************
+:help name='CRTSTMF'.
+COZZI-Create IFS Stream File - Help
+:p.The COZZI-Create IFS Stream File (CRTSTMF) command creates an empty
+ASCII text file on the IFS and sets its CCSID to the CCSID specified
+on this command.
+:ehelp.
+.*******************************************
+.*   Help for parameter STMF
+.*******************************************
+:help name='CRTSTMF/STMF'.
+New IFS File name (STMF) - Help
+:xh3.New IFS File name (STMF)
+:p.Specifies the IFS file name to be created.
+If the file already exists, no action is taken.
+Otherwise, the file is created as a Text file with the CCSID specified
+on the CCSID parameter of this command.
+.* Describe the function provided by the parameter.
+:p.This is a required parameter.
+:parml.
+:pt.:pv.ifs-file-name:epv.
+:pd.
+Specify the name of the IFS file to be created. If the file name is qualified,
+it is created in the specified directory. If it is unqualified, it creates the
+file in the job's current directory. If the current directory is the default
+the file is created in the user's home folder.
+:eparml.
+:ehelp.
+.*******************************************
+.*   Help for parameter CCSID
+.*******************************************
+:help name='CRTSTMF/CCSID'.
+CCSID to assigned to the file (CCSID) - Help
+:xh3.CCSID to assigned to the file (CCSID)
+:p.Specifies the CCSID for the file being created.
+:parml.
+:pt.:pk def.819:epk.
+:pd.
+The file is created as a PC ASCII file with CCSID(819).
+:pt.:pk.*ASCII:epk.
+:pd.
+The file is created as a PC ASCII file with CCSID(819).
+:pt.:pk.*UTF8:epk.
+:pd.
+The file is created as a PC ASCII file with CCSID(1208).
+:pt.:pk.*EBCDIC:epk.
+:pd.
+The file is created as an EBCDIC file with CCSID(37).
+Which is the North American EBCDIC CCSID.
+:pt.:pk.*JOB:epk.
+:pd.
+The file is created as an EBCDIC file with a CCSID equal to the
+CCSID assigned to the job running the CRTSTMF command.
+:pt.:pv.integer:epv.
+:pd.
+Specify a valid CCSID between 0 and 65535.
+The special value CCSID(0) is the same as specifying CCSID(*JOB).
+:eparml.
+:ehelp.
+.**************************************************
+.*
+.* Examples for CRTSTMF
+.*
+.**************************************************
+:help name='CRTSTMF/COMMAND/EXAMPLES'.
+Examples for CRTSTMF - Help
+:xh3.Examples for CRTSTMF
+:p.:hp2.Example 1: Simple Command Example:ehp2.
+:xmp.
+CRTSTMF  STMF('NOTES.TXT')
+:exmp.
+:p.This command creates the ASCII file named NOTES.TXT
+in the job's current direcotory. The CCSID will default to
+the PC ASCII CCSID which is 819.
+.*
+:p.:hp2.Example 2: More Complex Command Example:ehp2.
+:xmp.
+CRTSTMF  STMF('/home/iquery/logs/mylog.txt') CCSID(*UTF8)
+:exmp.
+:p.This command creates the file named MYLOG.TXT in the path name
+/HOME/IQUERY/LOGS and assigns the file CCSID(1208) which is UTF-8.
+:ehelp.
+.**************************************************
+.*
+.* Error messages for CRTSTMF
+.*
+.**************************************************
+:help name='CRTSTMF/ERROR/MESSAGES'.
+&msg(CPX0005,QCPFMSG). CRTSTMF - Help
+:xh3.&msg(CPX0005,QCPFMSG). CRTSTMF
+:p.:hp3.*ESCAPE &msg(CPX0006,QCPFMSG).:ehp3.
+.************************************************************************
+.* List the *ESCAPE, *STATUS, and *NOTIFY messages signalled from the command.
+.* The following are generic messages defined in message file QCPFMSG.
+.* Modify this list to match the list of error messages for the command.
+.************************************************************************
+:DL COMPACT.
+:DT.CPF9801
+:DD.&MSG(CPF9801,QCPFMSG,*LIBL,nosub).
+:DT.CPF9802
+:DD.&MSG(CPF9802,QCPFMSG,*LIBL,nosub).
+:DT.CPF9803
+:DD.&MSG(CPF9803,QCPFMSG,*LIBL,nosub).
+:DT.CPF9807
+:DD.&MSG(CPF9807,QCPFMSG,*LIBL,nosub).
+:DT.CPF9808
+:DD.&MSG(CPF9808,QCPFMSG,*LIBL,nosub).
+:DT.CPF9810
+:DD.&MSG(CPF9810,QCPFMSG,*LIBL,nosub).
+:DT.CPF9811
+:DD.&MSG(CPF9811,QCPFMSG,*LIBL,nosub).
+:DT.CPF9812
+:DD.&MSG(CPF9812,QCPFMSG,*LIBL,nosub).
+:DT.CPF9820
+:DD.&MSG(CPF9820,QCPFMSG,*LIBL,nosub).
+:DT.CPF9830
+:DD.&MSG(CPF9830,QCPFMSG,*LIBL,nosub).
+:DT.CPF9899
+:DD.&MSG(CPF9899,QCPFMSG,*LIBL,nosub).
+:EDL.
+:ehelp.
+:epnlgrp.
+ 

@@ -1,0 +1,126 @@
+:pnlgrp.
+.************************************************************************
+.*  Help for command IFSWRITER
+.************************************************************************
+:help name='IFSWRITER'.
+COZZI - Write Text to IFS file - Help
+:p.The COZZI - Write Text to IFS file (IFSWRITER) command
+writes a user-specified string to an IFS file. If the IFS file does not
+exist, it is created. The data is converted by the system from the JOB CCSID
+to that of the target file. This occurs as the data is being written to
+the file. If the IFSWRITER command creates the file, it is created with
+a CCSID of 819.
+:ehelp.
+.*******************************************
+.*   Help for parameter STMF
+.*******************************************
+:help name='IFSWRITER/STMF'.
+IFS Stream File name (STMF) - Help
+:xh3.IFS Stream File name (STMF)
+:p.Specifies the fully qualified IFS file to receive the data being
+written. If the file exists, the data is added to the end of the existing
+file. If the file does not exist, it is created with CCSID 819.
+.* Describe the function provided by the parameter.
+:p.This is a required parameter.
+:p.Use the & symbol in the first character of the parameter to
+extend the parameter when the command is prompted.
+:parml.
+:pt.:pv.path-name:epv.
+:pd.
+Specify the path and file to be written to.
+.* Describe the function provided by the user-defined parameter value.
+:eparml.
+:ehelp.
+.*******************************************
+.*   Help for parameter DATA
+.*******************************************
+:help name='IFSWRITER/DATA'.
+Data to write (DATA) - Help
+:xh3.Data to write (DATA)
+:p.Specifies the data to be written to the IFS file specified on
+the STMF parameter.
+:p.Use the & symbol in the first character of the parameter to
+extend the parameter when the command is prompted.
+.* Describe the function provided by the parameter.
+:parml.
+:pt.:pv.character-value:epv.
+:pd.
+Specify any text data to be written to the file. The data is converted to
+the CCSID of the file by the system as it is being written to the file.
+.* Describe the function provided by the user-defined parameter value.
+:eparml.
+:ehelp.
+.*******************************************
+.*   Help for parameter RCDDLM
+.*******************************************
+:help name='IFSWRITER/RCDDLM'.
+Add CR and/or LF to data (RCDDLM) - Help
+:xh3.Add CR and/or LF to data (RCDDLM)
+:p.Specifies whether a CR or LF is written to the file following the
+data specified on the DATA parameter.
+.* Describe the function provided by the parameter.
+:parml.
+:pt.:pk def.*NONE:epk.
+:pd.
+No addition record delimitor is written to the file. Only the data in
+the DATA parameter is written.
+:pt.:pk.*CRLF:epk.
+:pd.
+A carriage return/linefeed (X'0D25') sequence is written to the
+file following the data specified on the DATA parameter.
+.* Describe the function provided by the pre-defined parameter value.
+:pt.:pk.*LF:epk.
+:pd.
+A linefeed (X'25') sequence is written to the file following
+the data specified on the DATA parameter.
+.* Describe the function provided by the pre-defined parameter value.
+:pt.:pk.*CR:epk.
+:pd.
+A carriage (X'0D') sequence is written to the file following
+the data specified on the DATA parameter.
+.* Describe the function provided by the pre-defined parameter value.
+:pt.:pk.*LFCR:epk.
+:pd.
+A linefeed/carriage return (X'250D') sequence is written to the file
+following the data specified on the DATA parameter.
+.* Describe the function provided by the pre-defined parameter value.
+:pt.:pv.character-value:epv.
+:pd.
+Specify up to 10 characters or hexadecimal values that are written
+to the file following the data specified on the DATA parameter.
+.* Describe the function provided by the user-defined parameter value.
+:eparml.
+:ehelp.
+.**************************************************
+.*
+.* Examples for IFSWRITER
+.*
+.**************************************************
+:help name='IFSWRITER/COMMAND/EXAMPLES'.
+Examples for IFSWRITER - Help
+:xh3.Examples for IFSWRITER
+:p.:hp2.Example 1: Simple Write Text Example:ehp2.
+:xmp.
+IFSWRITER  STMF('/HOME/USER/MYSTUFF.TXT') +
+             DATA('This is some text written to the file.')
+:exmp.
+:p.This command write a text string to the file MYSTUFF.TXT
+that is located in the IFS folder named '/home/user'.
+.* Describe a simple invocation of the command.
+.*
+:p.:hp2.Example 2: Write text followed by a Linefeed:ehp2.
+:xmp.
+IFSWRITER  STMF('/home/app/log.info') +
+             DATA('This is some text written to the file.')
+             RCDDLM(*LF)
+:exmp.
+:p.This command writes out text to the file named LOG.INFO
+that is located in the '/home/app' directory. The text is
+followed by a single linefeed character. Normaly for IFS
+text files, you often want a single linefeed, as illustrated
+in this example.
+.* Describe a more complex invocation of the command.
+:ehelp.
+
+:epnlgrp.
+ 
