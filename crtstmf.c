@@ -14,7 +14,30 @@
 #include <triml.mih>
 #include <cpybytes.mih>
 
+       /**********************************************************/
+       /* Copyright 1992-2016 by R. Cozzi, Jr.                   */
+       /* All rights reserved. Reproduction permitted            */
+       /* for non-resale purposes only.                          */
+       /* MIT License                                            */
+       /* Part of the iOpen Project by Bob Cozzi                 */
+       /* http://www.cozTools.com/iOpen                          */
+       /**********************************************************/
 
+    /*************************************************************/
+    /* Create IFS Stream File (CRTSTMF)                          */
+    /* Author  :  Bob Cozzi                                      */
+    /* Date    :  06Sep2016                                      */
+    /* Purpose :  Allow a file to be created on the IFS          */
+    /*            with the CCSID being user-specified.           */
+    /*-----------------------------------------------------------*/
+    /* Rev. Log:                                                 */
+    /*  06-Sept-2016 - Refined the code, improved handling of    */
+    /*                 parameters. Removed unneeded code.        */
+    /*  07-Sept-2015 - Moved unneeded "set null terminator"      */
+    /*               - Changed file name length null insert      */
+    /*                 to use len variable.                      */
+    /*************************************************************/
+                
 
 typedef _Packed struct tagVARChar_T
 {
@@ -71,9 +94,7 @@ int ifsCrtFile(const VARCHAR_T* pFile, unsigned int* pCCSID)
      unsigned int file_ccsid = 819; // Default to PC ASCII
      unsigned int open_ccsid = 0;   // Default to JOB CCSID
 
-     szFile[0] = 0x00;
-
-     if (pFile->length > 0)
+         if (pFile->length > 0)
      {
         len = pFile->length;
         while (pFile->data[len-1]==' ')
@@ -91,7 +112,7 @@ int ifsCrtFile(const VARCHAR_T* pFile, unsigned int* pCCSID)
      }
 
      _CPYBYTES(szFile,pFile->data,len);
-     szFile[pFile->length] = 0x00;
+     szFile[len] = 0x00;
 
      if (pCCSID != NULL && *pCCSID >= 0)
          file_ccsid = *pCCSID;
