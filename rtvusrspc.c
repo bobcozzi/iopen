@@ -195,7 +195,20 @@ void main(int argc, char *argv[])
         }
         if (len < 0)
         {     // A length of -1 means retrieve through the *END of the US.
-            len = (cursize - start);
+ 
+          memset((char*)&ec,0x00,sizeof(ec));
+          ec.qusec.Bytes_Provided  = sizeof(ec);
+          QUSRUSAT( &spaceAttr, sizeof(spaceAttr), "SPCA0100", us->usrspc, &ec);
+          if (ec.qusec.Bytes_Available == 0)   // Got the current size?
+          {
+             cursize = spaceAttr.Space_Size;
+          }
+          else  // Can't get current size? should NEVER happen.
+          {
+              cursize = 32;  // use 32 bytes and send message to caller.
+              Qp0zLprintf("RTVUSRSPC: Could not retrieve current user space size\n");
+          }
+          len = (cursize - start);
         }
         if (len > rtnSize)
         {
