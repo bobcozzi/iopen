@@ -10,7 +10,6 @@
 #include <micptcom.mih>
 #include <rslvsp.mih>
 #include <cpybytes.mih>
-#include <micptcom.mih>
 
 #include <except.h>
 #include <QUSEC.h>
