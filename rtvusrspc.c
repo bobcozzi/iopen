@@ -178,13 +178,6 @@ void main(int argc, char *argv[])
             return;
         }
 
-        memset((char*)&ec,0x00,sizeof(ec));
-        ec.qusec.Bytes_Provided  = sizeof(ec);
-        QUSRUSAT( &spaceAttr, sizeof(spaceAttr), "SPCA0100", us->usrspc, &ec);
-        if (ec.qusec.Bytes_Available == 0)   // Got the current size?
-        {
-           cursize = spaceAttr.Space_Size;
-        }
         if (start < 0)
         {                // Can't be less than zero, so adjust accordingly
             start = 0;
